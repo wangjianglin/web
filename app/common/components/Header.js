@@ -13,7 +13,7 @@ class Header extends Component {
         return (
             <header className={styles.header}>
                 <div className={styles.left}>
-                    <span className={styles.span}>翡翠吧吧</span>
+                    <span className={styles.span}>CESS</span>
                 </div>
                 <div className={styles.right}>
                     <span className={styles.description}>Hello, world！</span>

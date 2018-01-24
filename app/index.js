@@ -12,13 +12,13 @@ import configureStore from './common/store/configureStore'
 var store = configureStore(window.REDUX_STATE);
 
 // import Main from './common/components/Main'
-import Main from './common/containers/Common'
+import App from './common/app'
 
 ReactDOM.render(
     <Provider store={store}>
         {/* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
-            <Main/>
+            <App/>
         </ConnectedRouter>
 
 

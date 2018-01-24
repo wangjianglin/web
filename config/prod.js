@@ -6,7 +6,7 @@ module.exports = {
 	  clientSecret: '123456',
 	  accessTokenUri: 'http://localhost:5555/oauth/token',
 	  authorizationUri: 'http://localhost:5555/oauth/authorize',
-	  redirectUri: 'http://localhost:3000/auth/callback',
+	  redirectUri: 'http://localhost:3002/auth/callback',
 	  scopes: ['GOODS']
 	},
 	proxy:'http://localhost:5555',

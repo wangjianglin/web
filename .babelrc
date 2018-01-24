@@ -2,9 +2,6 @@
 "presets" : ["react","stage-0","es2015"],
   "plugins": [
     "syntax-dynamic-import",
-    ["import-inspector", {
-      "serverSideRequirePath": true
-    }],
   	"add-module-exports",
     "transform-strict-mode",
     "transform-es2015-modules-commonjs",
@@ -12,5 +9,6 @@
     "transform-es2015-destructuring",
     "transform-es2015-parameters",
     "transform-react-jsx-source",
+    "transform-async-to-generator",
   ]
 }

@@ -39,6 +39,19 @@ module.exports = {
             loaders: [
                 'style-loader',
                 'css-loader?modules&camelCase&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:8]',
+                {
+                    loader:'postcss-loader',
+                    options: {
+                        ident: 'postcss',
+                        // sourceMap: true,
+                        plugins: (loader) => [
+                          require('postcss-import')({ root: loader.resourcePath }),
+                          require('postcss-cssnext')(),
+                          require('autoprefixer')(),
+                          require('cssnano')()
+                        ]
+                      }
+                  },
                 'sass-loader'
             ]
         }, {

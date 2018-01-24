@@ -9,11 +9,28 @@ import {
 } from 'react-router-dom'
 
 import Home from '../../home/containers/App'
-import About from '../../about/containers/App'
+// import About from '../../about/containers/App'
 // import Explore from '../../explore/containers/App'
 
 import Loadable from 'react-loadable';
 
+
+const About = Loadable({
+  // loader: () => import('../../explore/containers/App'),
+  loader: () => {
+    return new Promise((resolve, reject) =>
+            require.ensure(
+               ['../../about/containers/App'],
+               (require) => resolve(require('../../about/containers/App')),
+               (error) =>reject(error),
+               'dashboardChunk1'
+            )
+         )
+  },
+  loading() {
+    return <div>Loading...</div>
+  }
+});
 
 //new Promise((resolve) =>
 //   require.ensure(['path/to/module'], () =>
@@ -22,22 +39,17 @@ import Loadable from 'react-loadable';
 // ).then(doStuff)
 
 const Explore = Loadable({
-  loader: () => import('../../explore/containers/App'),
-  // loader: () => {
-  //   return new Promise((resolve, reject) =>
-  //           require.ensure(
-  //              ['../../explore/containers/App'],
-  //              (require) => { 
-  //                 // console.log(require);
-  //                 console.log('=======');
-  //                 resolve(require('../../explore/containers/App'));
-  //                 console.log('*******');
-  //               },
-  //              (error) =>{ console.log(error); reject(error);},
-  //              'dashboardChunk'
-  //           )
-  //        )
-  // },
+  // loader: () => import('../../explore/containers/App'),
+  loader: () => {
+    return new Promise((resolve, reject) =>
+            require.ensure(
+               ['../../explore/containers/App'],
+               (require) => resolve(require('../../explore/containers/App')),
+               (error) =>reject(error),
+               'dashboardChunk'
+            )
+         )
+  },
   loading() {
     return <div>Loading...</div>
   }

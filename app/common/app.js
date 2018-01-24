@@ -9,14 +9,14 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom'
 
-import Header from '../components/Header'
-import Navbar from '../components/Navbar'
-import Main from '../components/Main'
-import actions from '../actions'
-import styles from '../sass/Common'
-import '../sass/global'
+import Header from './components/Header'
+import Navbar from './components/Navbar'
+import Main from './components/Main'
+import actions from './actions'
+import styles from './sass/app'
+import './sass/global'
 
-class Common extends Component {
+class App extends Component {
     constructor() {
         super()
     }
@@ -52,4 +52,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Common)
+)(App)

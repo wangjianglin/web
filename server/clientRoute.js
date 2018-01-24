@@ -8,7 +8,7 @@ import {
   StaticRouter as Router
 } from 'react-router-dom'
 // import App from '../app/app'
-import Main from '../app/common/containers/Common'
+import Main from '../app/common/app'
 
 const store = configureStore()
 

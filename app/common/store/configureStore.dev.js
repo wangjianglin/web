@@ -1,7 +1,6 @@
 import {applyMiddleware, compose, createStore,combineReducers} from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from '../reducers'
-import DevTools from '../containers/DevTools'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { createBrowserHistory } from 'history';

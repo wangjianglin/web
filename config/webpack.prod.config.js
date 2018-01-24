@@ -17,7 +17,7 @@ function getExternals() {
 }
 
 clientConfig = {
-    devtool: 'eval-source-map',
+    // devtool: 'eval-source-map',
     context: path.resolve(__dirname, '..'),
     entry: {
         bundle: './app',
@@ -46,14 +46,22 @@ clientConfig = {
             }
         }, {
             test: /\.scss$/,
-            // loader: ExtractTextPlugin.extract('style-loader', 
-            //     'css-loader?modules&camelCase&importLoaders=1&localIdentName=[hash:base64:8]!postcss-loader!sass-loader',
-            //     'sass-loader'
-            //     )
-            use: ExtractTextPlugin.extract({
+            loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: [
                     'css-loader?modules&camelCase&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:8]',
+                    {
+                        loader:'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: (loader) => [
+                              require('postcss-import')({ root: loader.resourcePath }),
+                              require('postcss-cssnext')(),
+                              require('autoprefixer')(),
+                              require('cssnano')()
+                            ]
+                          }
+                      },
                     'sass-loader'
                 ]
             })
@@ -71,47 +79,19 @@ clientConfig = {
     // postcss: [autoprefixer({browsers: ['> 5%']})],
     resolve: {extensions: ['jsx', '.js', '.json', '.scss']},
     plugins: [
-  //   new ExtractTextPlugin('[name].[contenthash:6].css', {
-  //   allChunks : true 
-  // }),
-  //   new webpack.optimize.CommonsChunkPlugin({
-  //   names: ['vendor', 'mainifest'],
-  //   minChunks: 1
-  // }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {warnings: false},
-        //     comments: false
-        // }),
-        // new webpack.LoaderOptionsPlugin({
-          //   options: {
-          //     postcss: function () {
-          //       // return [precss, autoprefixer];
-          //       return [autoprefixer({browsers: ['> 5%']})]
-          //     },
-          //     // devServer: {
-          //     //   contentBase: "./public", //本地服务器所加载的页面所在的目录
-          //     //   colors: true, //终端中输出结果为彩色
-          //     //   historyApiFallback: true, //不跳转
-          //     //   inline: true //实时刷新
-          //     // }
-          //   }
-          // }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {warnings: false},
+            comments: false
+        }),
         new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
         new HtmlWebpackPlugin({
             filename: '../../dist/views/prod/index.html',
             template: './index.html',
-            // filename:'index.html',
-            // template:'index.html'
-            // chunksSortMode: 'none'
         }),
-        new ExtractTextPlugin('[name].[contenthash:8].css', {
-            allChunks: true,
-            splitChunks:true,
-            disable: false,
+        new ExtractTextPlugin({filename:'[name].[contenthash:8].css',
+            allChunks:true,
         }),
-
-        // new webpack.optimize.DedupePlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest'],
             filename: '[name].[chunkhash:8].js',
@@ -150,27 +130,22 @@ serverConfig = {
                 fallback: "style-loader",
                 use: [
                     'css-loader?modules&camelCase&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:8]',
+                    {
+                        loader:'postcss-loader',
+                        options: {
+                            ident: 'postcss',
+                            plugins: (loader) => [
+                              require('postcss-import')({ root: loader.resourcePath }),
+                              require('postcss-cssnext')(),
+                              require('autoprefixer')(),
+                              require('cssnano')()
+                            ]
+                          }
+                      },
                     'sass-loader'
                 ]
             })
-            // loader: ExtractTextPlugin.extract('style-loader', 
-            //     'css-loader?modules&camelCase&importLoaders=1&localIdentName=[hash:base64:8]',
-            //     'sass-loader'
-            //     )
         },
-        // {
-        //     test: /\.scss$/,
-        //     // loader: ExtractTextPlugin.extract('style-loader', 
-        //     //     'css-loader?modules&camelCase&importLoaders=1&localIdentName=[hash:base64:8]!postcss-loader!sass-loader',
-        //     //     'sass-loader'
-        //     //     )
-        //     fallback: "style-loader",
-        //     loaders: [
-        //         // 'style-loader',
-        //         'css-loader?modules&camelCase&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:8]',
-        //         'sass-loader'
-        //     ]
-        // }, 
         {
             test: /\.(jpg|png|gif|webp)$/,
             loader: 'url-loader?limit=8000'
@@ -186,16 +161,13 @@ serverConfig = {
     resolve: {extensions: ['jsx', '.js', '.json', '.scss']},
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
-        // new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {warnings: false},
             comments: false
         }),
         new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
-        new ExtractTextPlugin('[name].[contenthash:8].css', {
+        new ExtractTextPlugin({filename:'[name].[contenthash:8].css',
             allChunks: true,
-            splitChunks:true,
-            disable: false,
         })
     ]
 }
