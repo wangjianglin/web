@@ -75,7 +75,7 @@ class Main extends Component {
                 <Route path="/explore" component={Explore}/>
                 <Route path="/about" component={About}/>
                 <Route path="/topics" component={Topics}/>
-                <Route path="/home" component={Home}/>
+                <Route path="/" component={Home}/>
                 </Switch>
   
             

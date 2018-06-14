@@ -4,10 +4,12 @@ module.exports = {
 	oauth2:{
 	  clientId: 'web_app',
 	  clientSecret: '123456',
-	  accessTokenUri: 'http://localhost:5555/oauth/token',
-	  authorizationUri: 'http://localhost:5555/oauth/authorize',
-	  redirectUri: 'http://localhost:3000/auth/callback',
-	  scopes: ['GOODS']
+	  accessTokenUri: 'https://api-t.fcbb.io/oauth/token',
+	  authorizationUri: 'https://api-t.fcbb.io/oauth/authorize',
+	  logoutUri: 'http://localhost:5555/oauth/logout?redirect=http://localhost:3000',
+	  redirectUri: 'http://localhost:3000/oauth2/callback',
+	  scopes: ['GOODS'],
+	  cookie:'OAUTH2SESSION',
 	},
 	proxy:'http://localhost:5555',
 	build: {

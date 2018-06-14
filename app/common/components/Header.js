@@ -17,6 +17,7 @@ class Header extends Component {
                 </div>
                 <div className={styles.right}>
                     <span className={styles.description}>Hello, world！</span>
+                    <a href="/oauth2/logout">注销</a>
                     <img className={styles.img} src={imgAvatar}/>
                 </div>
             </header>

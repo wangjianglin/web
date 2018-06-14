@@ -4,7 +4,7 @@ const path = require('path'),
     autoprefixer = require('autoprefixer'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin')
-let clientConfig, serverConfig,clientConfig2;
+let clientConfig, serverConfig;
 
 function getExternals() {
     return fs.readdirSync(path.resolve(__dirname, '../node_modules'))

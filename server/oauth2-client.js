@@ -5,12 +5,12 @@ var defaultRequest = require('./request')
 var btoa = typeof Buffer === 'function' ? btoaBuffer : window.btoa
 
 /**
- * Export `OAuth2Client` class.
+ * 导出 `OAuth2Client` class.
  */
 module.exports = OAuth2Client
 
 /**
- * Default headers for executing OAuth 2.0 flows.
+ * 定义默认 headers.
  */
 var DEFAULT_HEADERS = {
   'Accept': 'application/json, application/x-www-form-urlencoded',
@@ -18,7 +18,7 @@ var DEFAULT_HEADERS = {
 }
 
 /**
- * Format error response types to regular strings for displaying to clients.
+ * 格式化client端显示的错误消息.
  *
  * Reference: http://tools.ietf.org/html/rfc6749#section-4.1.2.1
  */
@@ -145,7 +145,7 @@ function sanitizeScope (scopes) {
 
 function randomString(len) {
 　　len = len || 32;
-　　var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+　　var $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 　　var maxPos = $chars.length;
 　　var pwd = '';
 　　for (var i = 0; i < len; i++) {
@@ -169,7 +169,7 @@ function createUri (options, tokenType) {
     redirect_uri: options.redirectUri,
     scope: sanitizeScope(options.scopes),
     response_type: tokenType,
-    state: options.state || randomString(6)
+    state: options.state || randomString(8)
   }, options.query))
 }
 

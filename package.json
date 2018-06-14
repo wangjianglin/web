@@ -1,5 +1,5 @@
 {
-  "name": "oauth2-client",
+  "name": "feibiao-console",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "clean": "rimraf ./dist/client/* && rimraf ./dist/server/* && rimraf ./views/prod/*",
     "lint": "eslint . --ext .js",
     "pm2": "pm2",
-    "dist": "npm run build && node ./dist/server/server.js"
+    "dist": "node ./dist/server/server.js"
   },
   "dependencies": {
     "asset-require-hook": "^1.2.0",
